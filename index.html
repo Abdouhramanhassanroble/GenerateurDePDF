@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Générateur de PDF</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    </head>
+    <body>
+       <textarea id="text" placeholder="Votre texte"></textarea>
+       <button onclick="GenerateurPDF()"> Télécharger le pdf </button>
+
+       <script>
+        function GenerateurPDF(){
+            //nom du fichier 
+            var nom_fichier = prompt("Insérer le nom du fichier PDF:");
+            // generer le pdf desormais
+            var element = document.getElementById('text');
+            var opt = {
+                margin:       0.5,
+                 filename:     `${nom_fichier}.pdf`,
+                 image:        { type: 'jpeg', quality: 1  },
+                 html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            if(nom_fichier != null){
+                html2pdf().set(opt).from(element).save()
+            }else{
+                alert("Veuillez choisir un nom de fichier sale ptit con")
+            }
+        }      
+       </script>
+    </body>
+</html>
